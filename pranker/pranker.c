@@ -23,7 +23,7 @@ int main(void) {
             char buf[32];
             nrf_read(buf, sizeof(buf)); // discard the message
 
-            rx = 20;
+            rx = 10;
         }
 
         if (rx > 0) {

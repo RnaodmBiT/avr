@@ -31,10 +31,10 @@ int main(void) {
         pio_output_set(LED_STATUS, rx == 0);
 
 
-        // if (pio_input_get(BUTTON_BOOT) == 0) {
+        if (pio_input_get(BUTTON_BOOT) == 0) {
             const char buf[] = "Hello";
             nrf_write(buf, sizeof(buf));
-        // }
+        }
 
     }
 
