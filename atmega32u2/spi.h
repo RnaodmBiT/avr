@@ -25,6 +25,7 @@ typedef enum {
 
 
 inline uint8_t spi_write_byte(uint8_t byte) {
+    SPCR |= BIT(MSTR);
     SPDR = byte;
     while (!(SPSR & BIT(SPIF))) ;
     return SPDR;

@@ -34,7 +34,7 @@ void system_watchdog_timer_disable(void) {
 
 
 
-__attribute__((weak))
-void panic(void) {
-    while (true) ;
-}
+// __attribute__((weak))
+// void panic(void) {
+//     while (true) ;
+// }

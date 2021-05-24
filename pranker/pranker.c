@@ -20,8 +20,7 @@ int main(void) {
         delay_ms(1);
 
         if (nrf_has_data()) {
-            char buf[32];
-            nrf_read(buf, sizeof(buf)); // discard the message
+            nrf_read(NULL, 0); // discard the message
 
             rx = 10;
         }
@@ -38,5 +37,12 @@ int main(void) {
         } else {
             pio_output_high(LED_STATUS);
         }
+    }
+}
+
+void panic(void) {
+    while (true) {
+        delay_ms(100);
+        pio_output_toggle(LED_STATUS);
     }
 }

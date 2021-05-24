@@ -1,6 +1,4 @@
 
-BOARD = node_1_0
-
 SRC = hello.c
 
 TARGET = hello

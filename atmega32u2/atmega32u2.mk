@@ -1,5 +1,6 @@
 
 DIR := $(dir $(lastword $(MAKEFILE_LIST)))
+VPATH += $(DIR)
 
 ifndef F_CPU
 $(error F_CPU must be defined)
@@ -10,7 +11,7 @@ Q = @
 endif
 
 
-SRC += $(DIR)system.c $(foreach p, $(PERIPHERALS), $(DIR)$(p).c)
+SRC += system.c $(foreach p, $(PERIPHERALS), $(p).c)
 
 CC = avr-gcc
 OBJCOPY = avr-objcopy

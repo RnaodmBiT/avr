@@ -243,8 +243,8 @@ bool nrf_rx_fifo_empty(void) {
 
 
 bool nrf_has_data(void) {
-    return nrf_read_status() & STATUS_DR;
-    // return !nrf_rx_fifo_empty();
+    // return nrf_read_status() & STATUS_DR;
+    return !nrf_rx_fifo_empty();
     // return pio_input_get(NRF_IRQ) == 0;
 }
 
@@ -257,8 +257,8 @@ void nrf_read(void* data, int len) {
     pio_output_low(NRF_CS);
     spi_write_byte(R_RX_PAYLOAD);
     spi_read(data, len);
-    // for (int i = len; i < 32; ++i)
-        // spi_write_byte(0); // pull out the remaining bytes
+    for (int i = len; i < 32; ++i)
+        spi_write_byte(0); // pull out the remaining bytes
     pio_output_high(NRF_CS);
 
     nrf_flush_rx();
