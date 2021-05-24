@@ -9,11 +9,9 @@ int main(void) {
     system_init(CLOCK_EXT, CLOCK_DIV_1);
 
     pio_mode_set(LED_STATUS, PIO_OUTPUT_HIGH);
+    pio_mode_set(BUTTON_SYNC, PIO_INPUT_PULLUP);
 
     nrf_init(false);
-    // usb_cdc_init();
-
-    // sei();
 
     uint8_t blink = 1;
 
@@ -25,10 +23,11 @@ int main(void) {
             blink = 20;
         }
 
-        char hello[32];
-        sprintf(hello, "Hello %hhu\n", blink);
-
-        nrf_write(hello, sizeof(hello));
+        if (pio_input_get(BUTTON_SYNC) == 0) {
+            char hello[32];
+            sprintf(hello, "Hello %hhu\n", blink);
+            nrf_write(hello, sizeof(hello));
+        }
     }
 }
 

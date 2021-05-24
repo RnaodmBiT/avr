@@ -6,7 +6,8 @@
 int main(void) {
     system_init(CLOCK_EXT, CLOCK_DIV_1);
 
-    pio_mode_set(LED_STATUS, PIO_OUTPUT_HIGH);
+    pio_mode_set(LED_STATUS, PIO_INPUT_PULLUP);
+    pio_mode_set(BUTTON_BOOT, PIO_INPUT_PULLUP);
 
     usb_hid_init_mouse();
 
@@ -22,6 +23,10 @@ int main(void) {
         if (nrf_has_data()) {
             nrf_read(NULL, 0); // discard the message
 
+            rx = 10;
+        }
+
+        if (pio_input_get(BUTTON_BOOT) == 0) {
             rx = 10;
         }
 

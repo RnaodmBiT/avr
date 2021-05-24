@@ -60,6 +60,7 @@ int main(void) {
     sei();
 
     nrf_init(false);
+    nrf_set_channel(64);
 
     uint8_t timeout = 0;
 
